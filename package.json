@@ -1,0 +1,27 @@
+{
+  "name": "uberreceipts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bell": "^8.7.0",
+    "boom": "^5.2.0",
+    "env2": "^2.2.0",
+    "googleapis": "^20.1.0",
+    "handlebars": "^4.0.10",
+    "hapi": "^16.5.2",
+    "hapi-auth-basic": "^4.2.0",
+    "hapi-auth-cookie": "^7.0.0",
+    "hapi-auth-google": "^16.1.0",
+    "hoek": "^4.2.0",
+    "inert": "^4.2.1",
+    "is-money-usd": "^0.1.2",
+    "jsonwebtoken": "^7.4.2",
+    "vision": "^4.1.1"
+  }
+}
