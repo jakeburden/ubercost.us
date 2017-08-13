@@ -100,10 +100,15 @@ server.register(plugins, function (err) {
   server.route({
     method: 'GET',
     path: '/{param*}',
-    handler: {
-      directory: {
-        path: 'public',
-        listing: true
+    config: {
+      auth: {
+        mode: 'optional'
+      },
+      handler: {
+        directory: {
+          path: 'public',
+          listing: true
+        }
       }
     }
   })
@@ -114,7 +119,6 @@ server.register(plugins, function (err) {
     config: {
       auth: 'google',
       handler: function (request, reply) {
-
         if (!request.auth.isAuthenticated) {
           return reply(boom.unauthorized('Authentication failed due to: ' + request.auth.error.message))
         }
