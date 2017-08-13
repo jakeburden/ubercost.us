@@ -40,7 +40,8 @@ server.register(plugins, function (err) {
 
   server.auth.strategy('session', 'cookie', {
     isSecure: false,
-    password: 'secret_cookie_encryption_password'
+    password: 'secret_cookie_encryption_password',
+    isSameSite: 'Lax'
   })
 
   server.auth.strategy('google', 'bell', {
@@ -50,7 +51,10 @@ server.register(plugins, function (err) {
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     location: process.env.BASE_URL,
     isSecure: false,
-    scope: scopes
+    scope: scopes,
+    providerParams: {
+      prompt: 'select_account'
+    }
   })
 
   server.auth.default('session')
@@ -73,13 +77,22 @@ server.register(plugins, function (err) {
         mode: 'optional'
       },
       handler: function (request, reply) {
-        if (request.auth.isAuthenticated) {
-          reply.view('authenticated/index', {
-            name: request.auth.credentials.displayName
-          })
-        } else {
-          reply.view('index')
-        }
+        reply.view('index')
+      }
+    }
+  })
+
+  server.route({
+    method: 'GET',
+    path: '/account',
+    config: {
+      auth: {
+        mode: 'required'
+      },
+      handler: function (request, reply) {
+        reply.view('authenticated/index', {
+          name: request.auth.credentials.displayName
+        })
       }
     }
   })
@@ -119,7 +132,7 @@ server.register(plugins, function (err) {
           }
         })
 
-        return reply.redirect('/')
+        return reply.redirect('/account')
       }
     }
   })
@@ -199,7 +212,7 @@ function getMessages (request, reply, user) {
 
 function readMessage (request, reply, user) {
   return function (err, response) {
-    if (err) reply(err)
+    if (err || !response) reply(err)
     var headers = response.payload
       ? response.payload.headers
       : null
