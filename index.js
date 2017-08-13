@@ -84,6 +84,19 @@ server.register(plugins, function (err) {
 
   server.route({
     method: 'GET',
+    path: '/privacy',
+    config: {
+      auth: {
+        mode: 'optional'
+      },
+      handler: function (request, reply) {
+        reply.view('privacy')
+      }
+    }
+  })
+
+  server.route({
+    method: 'GET',
     path: '/account',
     config: {
       auth: {
