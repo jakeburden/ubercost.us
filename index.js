@@ -40,7 +40,7 @@ server.register(plugins, function (err) {
 
   server.auth.strategy('session', 'cookie', {
     isSecure: false,
-    password: 'secret_cookie_encryption_password',
+    password: process.env.PASSWORD,
     isSameSite: 'Lax'
   })
 
