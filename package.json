@@ -1,12 +1,12 @@
 {
-  "name": "uberreceipts",
+  "name": "Uber Cost",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "author": "Jake Burden",
   "license": "ISC",
   "dependencies": {
     "bell": "^8.7.0",
